@@ -58,14 +58,14 @@ def load_data(city, month, day):
 
     # get month and day of week 
     df['month'] = df['Start Time'].dt.month_name().str.lower()
-    df['day of week'] = df['Start Time'].dt.dayofweek
+    df['day'] = df['Start Time'].dt.dayofweek
 
     if month != 'all': 
         # apply month filter
          df = df[df['month'] == month]
     if day != 'all': 
         # apply day filter
-        df = df[df['day of week'] == day]
+        df = df[df['day'] == day]
     return df
 
 
@@ -79,7 +79,7 @@ def time_stats(df):
     print('Most Commonly Month:\n', df['month'].mode()[0])
 
     # display the most common day of week
-    print('Most Commonly Day of Week:\n', df['day of week'].mode()[0])
+    print('Most Commonly Day of Week:\n', df['day'].mode()[0])
 
     # display the most common start hour
     start_hour = df['Start Time'].dt.hour
