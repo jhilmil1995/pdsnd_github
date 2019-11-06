@@ -20,14 +20,14 @@ def get_filters():
     city = ''
     list_of_cities = ['chicago', 'new york city', 'washington']
     while city not in list_of_cities:
-        city = input('Enter name of the city to analyze:\n')
+        city = input('Enter name of the city to analyze:\n').lower()
 
     # get user input for month (all, january, february, ... , june)
     month = ''
     list_of_months = ['all', 'january', 'february', 'march', 'april', 'may', 'june', 'july', 
             'august', 'september', 'october', 'november', 'december']
     while month not in list_of_months:
-        month = input('Enter month to filter by, or "all" to apply no month filter:\n')
+        month = input('Enter month to filter by, or "all" to apply no month filter:\n').lower()
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = -1
@@ -154,6 +154,21 @@ def user_stats(df):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+def display_data(df):
+    display_data = ''
+    list_of_options = ['yes', 'no']
+    while display_data not in list_of_options:
+        display_data = input('do you want to see raw data:\n').lower()
+    if display_data == 'yes':
+        display_5_more = ''
+        item = 0
+        while display_5_more != 'no':
+            display_5_more = input('do you want to see more 5 lines of raw data?:\n').lower()
+            if display_5_more == 'yes':
+                for i in range(item,item+5):
+                    print('---------- data point {} ----------'.format(i))
+                    print(df.iloc[i])
+                item = i
 
 def main():
     while True:
@@ -164,7 +179,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
+        display_data(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
